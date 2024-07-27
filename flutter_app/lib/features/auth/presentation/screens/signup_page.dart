@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_app/features/auth/presentation/screens/login_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SignupPage extends StatefulWidget {
@@ -30,28 +32,33 @@ class _SignupPageState extends State<SignupPage> {
               children: [
                 TextFormField(
                   autofocus: true,
-                  decoration: const InputDecoration(
-                    hintText: 'username',
-                  ),
+                  decoration: const InputDecoration(hintText: 'username'),
                   controller: _usernameController,
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: 'email',
-                  ),
+                  decoration: const InputDecoration(hintText: 'email'),
                   controller: _emailController,
                 ),
                 const SizedBox(height: 10),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: 'password',
-                  ),
+                  decoration: const InputDecoration(hintText: 'password'),
                   obscureText: true,
                   controller: _passwordController,
                 ),
                 const SizedBox(height: 10),
-                ElevatedButton(onPressed: () {}, child: const Text('Sign Up')),
+                ElevatedButton(
+                  onPressed: () {
+                    context.read<AuthBloc>().add(
+                          AuthSignUpRequested(
+                            username: _usernameController.text,
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          ),
+                        );
+                  },
+                  child: const Text('Sign Up'),
+                ),
                 const SizedBox(height: 10),
                 TextButton(
                   onPressed: () {

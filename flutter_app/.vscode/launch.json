@@ -8,7 +8,10 @@
       "name": "flutter_app",
       "request": "launch",
       "type": "dart",
-      "args": ["-d", "chrome"]
+      "args": [
+        "--dart-define-from-file",
+        "api-keys.dev.json"
+      ]
     },
     {
       "name": "flutter_app (profile mode)",
